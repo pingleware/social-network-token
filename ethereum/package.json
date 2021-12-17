@@ -1,0 +1,32 @@
+{
+  "name": "mykronee",
+  "version": "1.0.0",
+  "description": "A social network token",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": {
+    "name": "PressPage Entertainment Inc DBA My Kronee Cafe"
+  },
+  "maintainers": [
+    {
+      "name": "PressPage Entertainment Inc DBA PINGLEWARE"
+    },
+    {
+      "name": "Patrick O. Ingle"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.4.1",
+    "@openzeppelin/contracts-upgradeable": "^4.4.1"
+  },
+  "devDependencies": {
+    "@openzeppelin/truffle-upgrades": "^1.11.0"
+  }
+}
