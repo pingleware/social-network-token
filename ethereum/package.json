@@ -7,24 +7,33 @@
     "test": "test"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "clean": "rm -frd build/contracts"
   },
   "keywords": [],
   "author": {
-    "name": "PressPage Entertainment Inc DBA My Kronee Cafe"
+    "name": "PressPage Entertainment Inc DBA My Kronee Cafe",
+    "email": "support@mykonee.cafe",
+    "url": "https://mykronee.cafe"
   },
   "maintainers": [
     {
-      "name": "PressPage Entertainment Inc DBA PINGLEWARE"
+      "name": "PressPage Entertainment Inc DBA PINGLEWARE",
+      "email": "maintainers@pingleware.work",
+      "url": "http://pingleware.work"
     },
     {
-      "name": "Patrick O. Ingle"
+      "name": "Patrick O. Ingle",
+      "email": "me@patrickingle.info",
+      "url": "https://patrickingle.info"
     }
   ],
   "license": "CC-BY-4.0",
   "dependencies": {
     "@openzeppelin/contracts": "^4.4.1",
-    "@openzeppelin/contracts-upgradeable": "^4.4.1"
+    "@openzeppelin/contracts-upgradeable": "^4.4.1",
+    "@pingleware/contracts": "^1.0.3",
+    "web3": "^1.6.1"
   },
   "devDependencies": {
     "@openzeppelin/truffle-upgrades": "^1.11.0"

@@ -1,9 +1,11 @@
 
-const { deployProxy, upgradeProxy } = require('@openzeppelin/truffle-upgrades');
+//const { deployProxy, upgradeProxy } = require('@openzeppelin/truffle-upgrades');
 
 var SocialNetworkToken = artifacts.require('./SocialNetworkToken');
 
-module.exports = async function(deployer) {
+module.exports = function(deployer) {
+     deployer.deploy(SocialNetworkToken);
+    /*
     try {
         var instance = await SocialNetworkToken.deployed();
         var upgraded = await upgradeProxy(instance.address, SocialNetworkToken, { deployer });
@@ -12,4 +14,5 @@ module.exports = async function(deployer) {
         var instance = await deployProxy(SocialNetworkToken, [], { deployer });
         console.log("Deployed", instance.address);    
     }
+    */
 }

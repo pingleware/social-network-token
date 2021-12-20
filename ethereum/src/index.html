@@ -8,271 +8,589 @@
 <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
-html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
+  html, body, h1, h2, h3, h4, h5 {
+    font-family: "Open Sans", sans-serif
+  }
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+
+  .footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+  }
 </style>
+
 <body class="w3-theme-l5">
 
-<!-- Navbar -->
-<div class="w3-top">
- <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
-  <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2" href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
-  <a href="#" class="w3-bar-item w3-button w3-padding-large w3-theme-d4"><i class="fa fa-home w3-margin-right"></i>MyK=MyF</a>
-  <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="News"><i class="fa fa-globe"></i></a>
-  <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Account Settings"><i class="fa fa-user"></i></a>
-  <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Messages"><i class="fa fa-envelope"></i></a>
-  <div class="w3-dropdown-hover w3-hide-small">
-    <button class="w3-button w3-padding-large" title="Notifications"><i class="fa fa-bell"></i><span class="w3-badge w3-right w3-small w3-green">3</span></button>     
-    <div class="w3-dropdown-content w3-card-4 w3-bar-block" style="width:300px">
-      <a href="#" class="w3-bar-item w3-button">One new friend request</a>
-      <a href="#" class="w3-bar-item w3-button">John Doe posted on your wall</a>
-      <a href="#" class="w3-bar-item w3-button">Jane likes your post</a>
+  <!-- LOGIN PAGE -->
+  <div id="login-page" class="w3-content">
+    <br/><br/><br/>
+    <div class="w3-center"><br>
+      <img src="https://www.w3schools.com/w3css/img_avatar4.png" alt="Avatar" style="width:30%"
+        class="w3-circle w3-margin-top">
+    </div>
+
+    <div class="w3-container">
+      <div class="w3-section">
+        <label><b>Username</b></label>
+        <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter Username" name="userName" id="userName"
+          required>
+        <label><b>Password</b></label>
+        <input class="w3-input w3-border" type="password" placeholder="Enter Password" name="password" id="password" required>
+        <button class="w3-button w3-block w3-green w3-section w3-padding" id="login">Login</button>
+        <button class="w3-button w3-block w3-green w3-section w3-padding" id="register" onclick="showRegisterDialog();">Register</button>
+        <input class="w3-check w3-margin-top" type="checkbox" checked="checked"> Remember me
+      </div>
+    </div>
+    <div id="register-dialog" class="w3-modal">
+      <div class="w3-modal-content">
+        <div class="w3-container">
+          <h2 class="w3-green">Register a New User</h2>
+          <label for="register-choice"></label>
+          <select class="w3-input w3-block" id="register-choice" onchange="registerChoice(this)">
+            <option value="import">Import</option>
+            <option value="create" selected>Create</option>
+          </select>
+          <span id="register-create">
+            <label for="register-passphrase">Passphrase</label>
+            <input type="text" id="register-passphrase" class="w3-input w3-block" value="" placeholder="" />
+            <label for="register-account">Account</label>
+            <input type="text" id="register-account" class="w3-input w3-block w3-light-grey" value="" placeholder="Your new account will be shown here" readonly />
+          </span>
+          <span id="register-import" style="display: none;">
+            <label for="register-privatekey">Private Key</label>
+            <input type="text" id="register-privatekey" class="w3-input w3-block" value="" placeholder="Your private key?" />
+          </span>
+          <br/>
+          <button class="w3-button w3-block w3-black" id="register-now">Submit</button>
+          <br/>
+          <button class="w3-button w3-block w3-orange" onclick="document.getElementById('register-dialog').style.display='none';">Cancel</button>
+          <br/>
+        </div>
+      </div>
     </div>
   </div>
-  <a href="#" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="My Account">
-    <img src="https://www.w3schools.com/w3images/avatar2.png" class="w3-circle" style="height:23px;width:23px" alt="Avatar">
-  </a>
- </div>
-</div>
 
-<!-- Navbar on small screens -->
-<div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
-  <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 1</a>
-  <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 2</a>
-  <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 3</a>
-  <a href="#" class="w3-bar-item w3-button w3-padding-large">My Profile</a>
-</div>
-
-<!-- Page Container -->
-<div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">    
-  <!-- The Grid -->
-  <div class="w3-row">
-    <!-- Left Column -->
-    <div class="w3-col m3">
-      <!-- Profile -->
-      <div class="w3-card w3-round w3-white">
-        <div class="w3-container">
-         <h4 class="w3-center">My Profile</h4>
-         <p class="w3-center"><img src="https://www.w3schools.com/w3images/avatar3.png" class="w3-circle" style="height:106px;width:106px" alt="Avatar"></p>
-         <hr>
-         <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i> Designer, UI</p>
-         <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i> London, UK</p>
-         <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> April 1, 1988</p>
+  <!-- Navbar -->
+    <div class="w3-top">
+      <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
+        <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2" href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
+        <a href="#" class="w3-bar-item w3-button w3-padding-large w3-theme-d4"><i class="fa fa-home w3-margin-right"></i><span class="w3-xlarge">&#128106;</span></a>
+        <a href="#" id="nav-globe" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="News"  style="display: none;">
+          <i class="fa fa-globe"></i>
+        </a>
+        <a href="#" id="nav-user" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Account Settings" style="display: none;"><i class="fa fa-user"></i></a>
+        <a href="#" id="nav-mail" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Messages" style="display: none;"><i class="fa fa-envelope"></i></a>
+        <div id="nav-notify" class="w3-dropdown-hover w3-hide-small" style="display: none;">
+          <button class="w3-button w3-padding-large" title="Notifications">
+            <i class="fa fa-bell"></i>
+            <span class="w3-badge w3-right w3-small w3-green">3</span>
+          </button>
+          <div class="w3-dropdown-content w3-card-4 w3-bar-block" style="width:300px;display: none;">
+            <a href="#" class="w3-bar-item w3-button">One new friend request</a>
+            <a href="#" class="w3-bar-item w3-button">John Doe posted on your wall</a>
+            <a href="#" class="w3-bar-item w3-button">Jane likes your post</a>
+          </div>
+        </div>
+        <div class="w3-dropdown-hoverw3-bar-item w3-right">
+          <a href="#" id="nav-account" class="w3-button  w3-hide-small w3-padding-large w3-hover-white" title="My Account" style="display: none;">
+            <img src="https://www.w3schools.com/w3images/avatar2.png" class="w3-circle" style="height:23px;width:23px" alt="Avatar">
+          </a>
+          <div class="w3-dropdown-content w3-bar-block w3-card-4">
+            <a href="#" class="w3-bar-item w3-button">Accouny</a>
+            <a href="#" class="w3-bar-item w3-button">Logoff</a>
+          </div>
         </div>
       </div>
-      <br>
-      
-      <!-- Accordion -->
-      <div class="w3-card w3-round">
-        <div class="w3-white">
-          <button onclick="myFunction('Demo1')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-circle-o-notch fa-fw w3-margin-right"></i> My Groups</button>
-          <div id="Demo1" class="w3-hide w3-container">
-            <p>Some text..</p>
-          </div>
-          <button onclick="myFunction('Demo2')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-calendar-check-o fa-fw w3-margin-right"></i> My Events</button>
-          <div id="Demo2" class="w3-hide w3-container">
-            <p>Some other text..</p>
-          </div>
-          <button onclick="myFunction('Demo3')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-users fa-fw w3-margin-right"></i> My Photos</button>
-          <div id="Demo3" class="w3-hide w3-container">
-         <div class="w3-row-padding">
-         <br>
-           <div class="w3-half">
-             <img src="https://www.w3schools.com/w3images/lights.jpg" style="width:100%" class="w3-margin-bottom">
-           </div>
-           <div class="w3-half">
-             <img src="https://www.w3schools.com/w3images/nature.jpg" style="width:100%" class="w3-margin-bottom">
-           </div>
-           <div class="w3-half">
-             <img src="https://www.w3schools.com/w3images/mountains.jpg" style="width:100%" class="w3-margin-bottom">
-           </div>
-           <div class="w3-half">
-             <img src="https://www.w3schools.com/w3images/forest.jpg" style="width:100%" class="w3-margin-bottom">
-           </div>
-           <div class="w3-half">
-             <img src="https://www.w3schools.com/w3images/nature.jpg" style="width:100%" class="w3-margin-bottom">
-           </div>
-           <div class="w3-half">
-             <img src="https://www.w3schools.com/w3images/snow.jpg" style="width:100%" class="w3-margin-bottom">
-           </div>
-         </div>
-          </div>
-        </div>      
-      </div>
-      <br>
-      
-      <!-- Interests --> 
-      <div class="w3-card w3-round w3-white w3-hide-small">
-        <div class="w3-container">
-          <p>Interests</p>
-          <p>
-            <span class="w3-tag w3-small w3-theme-d5">News</span>
-            <span class="w3-tag w3-small w3-theme-d4">W3Schools</span>
-            <span class="w3-tag w3-small w3-theme-d3">Labels</span>
-            <span class="w3-tag w3-small w3-theme-d2">Games</span>
-            <span class="w3-tag w3-small w3-theme-d1">Friends</span>
-            <span class="w3-tag w3-small w3-theme">Games</span>
-            <span class="w3-tag w3-small w3-theme-l1">Friends</span>
-            <span class="w3-tag w3-small w3-theme-l2">Food</span>
-            <span class="w3-tag w3-small w3-theme-l3">Design</span>
-            <span class="w3-tag w3-small w3-theme-l4">Art</span>
-            <span class="w3-tag w3-small w3-theme-l5">Photos</span>
-          </p>
-        </div>
-      </div>
-      <br>
-      
-      <!-- Alert Box -->
-      <div class="w3-container w3-display-container w3-round w3-theme-l4 w3-border w3-theme-border w3-margin-bottom w3-hide-small">
-        <span onclick="this.parentElement.style.display='none'" class="w3-button w3-theme-l3 w3-display-topright">
-          <i class="fa fa-remove"></i>
-        </span>
-        <p><strong>Hey!</strong></p>
-        <p>People are looking at your profile. Find out who.</p>
-      </div>
-    
-    <!-- End Left Column -->
     </div>
-    
-    <!-- Middle Column -->
-    <div class="w3-col m7">
-    
-      <div class="w3-row-padding">
-        <div class="w3-col m12">
+
+    <!-- Navbar on small screens -->
+    <div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large" style="display: none;">
+      <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 1</a>
+      <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 2</a>
+      <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 3</a>
+      <a href="#" class="w3-bar-item w3-button w3-padding-large">My Profile</a>
+    </div>
+  <!-- ADMINISTRATOR-OWNER PAGE -->
+  <div id="owner-page" class="w3-container w3-content" style="max-width:1400px;margin-top:80px;display:none;">
+  </div>
+  <!-- ADVERTISER PAGE -->
+  <div id="advertiser-page" class="w3-container w3-content" style="max-width:1400px;margin-top:80px;display:none;">
+  </div>
+  <!-- SOCIAL MAIN PAGE -USER -->
+    <!-- Page Container -->
+    <div id="main-page" class="w3-container w3-content" style="max-width:1400px;margin-top:80px;display:none;">
+      <!-- The Grid -->
+      <div class="w3-row">
+        <!-- Left Column -->
+        <div class="w3-col m3">
+          <!-- Profile -->
           <div class="w3-card w3-round w3-white">
-            <div class="w3-container w3-padding">
-              <h6 class="w3-opacity">Social Media template by w3.css</h6>
-              <p contenteditable="true" class="w3-border w3-padding">Status: Feeling Blue</p>
-              <button type="button" class="w3-button w3-theme"><i class="fa fa-pencil"></i>  Post</button> 
+            <div class="w3-container">
+              <h4 class="w3-center">My Profile</h4>
+              <p class="w3-center"><img src="https://www.w3schools.com/w3images/avatar3.png" class="w3-circle"
+                  style="height:106px;width:106px" alt="Avatar"></p>
+              <hr>
+              <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i> Designer, UI</p>
+              <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i> London, UK</p>
+              <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> April 1, 1988</p>
             </div>
           </div>
-        </div>
-      </div>
-      
-      <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-        <img src="https://www.w3schools.com/w3images/avatar2.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
-        <span class="w3-right w3-opacity">1 min</span>
-        <h4>John Doe</h4><br>
-        <hr class="w3-clear">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-          <div class="w3-row-padding" style="margin:0 -16px">
-            <div class="w3-half">
-              <img src="https://www.w3schools.com/w3images/lights.jpg" style="width:100%" alt="Northern Lights" class="w3-margin-bottom">
-            </div>
-            <div class="w3-half">
-              <img src="https://www.w3schools.com/w3images/nature.jpg" style="width:100%" alt="Nature" class="w3-margin-bottom">
-          </div>
-        </div>
-        <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i>  Like</button> 
-        <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-comment"></i>  Comment</button> 
-      </div>
-      
-      <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-        <img src="https://www.w3schools.com/w3images/avatar5.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
-        <span class="w3-right w3-opacity">16 min</span>
-        <h4>Jane Doe</h4><br>
-        <hr class="w3-clear">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-        <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i>  Like</button> 
-        <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-comment"></i>  Comment</button> 
-      </div>  
+          <br>
 
-      <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-        <img src="https://www.w3schools.com/w3images/avatar6.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
-        <span class="w3-right w3-opacity">32 min</span>
-        <h4>Angie Jane</h4><br>
-        <hr class="w3-clear">
-        <p>Have you seen this?</p>
-        <img src="https://www.w3schools.com/w3images/nature.jpg" style="width:100%" class="w3-margin-bottom">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-        <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i>  Like</button> 
-        <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-comment"></i>  Comment</button> 
-      </div> 
-      
-    <!-- End Middle Column -->
+          <!-- Accordion -->
+          <div class="w3-card w3-round">
+            <div class="w3-white">
+              <button onclick="myFunction('Demo1')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i
+                  class="fa fa-circle-o-notch fa-fw w3-margin-right"></i> My Groups</button>
+              <div id="Demo1" class="w3-hide w3-container">
+                <p>Some text..</p>
+              </div>
+              <button onclick="myFunction('Demo2')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i
+                  class="fa fa-calendar-check-o fa-fw w3-margin-right"></i> My Events</button>
+              <div id="Demo2" class="w3-hide w3-container">
+                <p>Some other text..</p>
+              </div>
+              <button onclick="myFunction('Demo3')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i
+                  class="fa fa-users fa-fw w3-margin-right"></i> My Photos</button>
+              <div id="Demo3" class="w3-hide w3-container">
+                <div class="w3-row-padding">
+                  <br>
+                  <div class="w3-half">
+                    <img src="https://www.w3schools.com/w3images/lights.jpg" style="width:100%"
+                      class="w3-margin-bottom">
+                  </div>
+                  <div class="w3-half">
+                    <img src="https://www.w3schools.com/w3images/nature.jpg" style="width:100%"
+                      class="w3-margin-bottom">
+                  </div>
+                  <div class="w3-half">
+                    <img src="https://www.w3schools.com/w3images/mountains.jpg" style="width:100%"
+                      class="w3-margin-bottom">
+                  </div>
+                  <div class="w3-half">
+                    <img src="https://www.w3schools.com/w3images/forest.jpg" style="width:100%"
+                      class="w3-margin-bottom">
+                  </div>
+                  <div class="w3-half">
+                    <img src="https://www.w3schools.com/w3images/nature.jpg" style="width:100%"
+                      class="w3-margin-bottom">
+                  </div>
+                  <div class="w3-half">
+                    <img src="https://www.w3schools.com/w3images/snow.jpg" style="width:100%" class="w3-margin-bottom">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+
+          <!-- Interests -->
+          <div class="w3-card w3-round w3-white w3-hide-small">
+            <div class="w3-container">
+              <p>Interests</p>
+              <p>
+                <span class="w3-tag w3-small w3-theme-d5">News</span>
+                <span class="w3-tag w3-small w3-theme-d4">W3Schools</span>
+                <span class="w3-tag w3-small w3-theme-d3">Labels</span>
+                <span class="w3-tag w3-small w3-theme-d2">Games</span>
+                <span class="w3-tag w3-small w3-theme-d1">Friends</span>
+                <span class="w3-tag w3-small w3-theme">Games</span>
+                <span class="w3-tag w3-small w3-theme-l1">Friends</span>
+                <span class="w3-tag w3-small w3-theme-l2">Food</span>
+                <span class="w3-tag w3-small w3-theme-l3">Design</span>
+                <span class="w3-tag w3-small w3-theme-l4">Art</span>
+                <span class="w3-tag w3-small w3-theme-l5">Photos</span>
+              </p>
+            </div>
+          </div>
+          <br>
+
+          <!-- Alert Box -->
+          <div
+            class="w3-container w3-display-container w3-round w3-theme-l4 w3-border w3-theme-border w3-margin-bottom w3-hide-small">
+            <span onclick="this.parentElement.style.display='none'" class="w3-button w3-theme-l3 w3-display-topright">
+              <i class="fa fa-remove"></i>
+            </span>
+            <p><strong>Hey!</strong></p>
+            <p>People are looking at your profile. Find out who.</p>
+          </div>
+
+          <!-- End Left Column -->
+        </div>
+
+        <!-- Middle Column -->
+        <div class="w3-col m7">
+
+          <div class="w3-row-padding">
+            <div class="w3-col m12">
+              <div class="w3-card w3-round w3-white">
+                <div class="w3-container w3-padding">
+                  <h6 class="w3-opacity">Social Media template by w3.css</h6>
+                  <p contenteditable="true" class="w3-border w3-padding">Status: Feeling Blue</p>
+                  <button type="button" class="w3-button w3-theme"><i class="fa fa-pencil"></i>  Post</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+            <img src="https://www.w3schools.com/w3images/avatar2.png" alt="Avatar"
+              class="w3-left w3-circle w3-margin-right" style="width:60px">
+            <span class="w3-right w3-opacity">1 min</span>
+            <h4>John Doe</h4><br>
+            <hr class="w3-clear">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+              dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+              ea commodo consequat.</p>
+            <div class="w3-row-padding" style="margin:0 -16px">
+              <div class="w3-half">
+                <img src="https://www.w3schools.com/w3images/lights.jpg" style="width:100%" alt="Northern Lights"
+                  class="w3-margin-bottom">
+              </div>
+              <div class="w3-half">
+                <img src="https://www.w3schools.com/w3images/nature.jpg" style="width:100%" alt="Nature"
+                  class="w3-margin-bottom">
+              </div>
+            </div>
+            <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i>
+               Like</button>
+              <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-down"></i>
+               Dislike</button>
+              <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-comment"></i>
+               Comment</button>
+          </div>
+
+          <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+            <img src="https://www.w3schools.com/w3images/avatar5.png" alt="Avatar"
+              class="w3-left w3-circle w3-margin-right" style="width:60px">
+            <span class="w3-right w3-opacity">16 min</span>
+            <h4>Jane Doe</h4><br>
+            <hr class="w3-clear">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+              dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+              ea commodo consequat.</p>
+            <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i>
+               Like</button>
+            <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-down"></i>
+               Dislike</button>
+            <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-comment"></i>
+               Comment</button>
+          </div>
+
+          <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+            <img src="https://www.w3schools.com/w3images/avatar6.png" alt="Avatar"
+              class="w3-left w3-circle w3-margin-right" style="width:60px">
+            <span class="w3-right w3-opacity">32 min</span>
+            <h4>Angie Jane</h4><br>
+            <hr class="w3-clear">
+            <p>Have you seen this?</p>
+            <img src="https://www.w3schools.com/w3images/nature.jpg" style="width:100%" class="w3-margin-bottom">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+              dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+              ea commodo consequat.</p>
+            <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i>
+               Like</button>
+            <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-down"></i>
+               Dislike</button>
+            <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-comment"></i>
+               Comment</button>
+          </div>
+
+          <!-- End Middle Column -->
+        </div>
+
+        <!-- Right Column -->
+        <div class="w3-col m2">
+          <div class="w3-card w3-round w3-white w3-center">
+            <div class="w3-container">
+              <p>Upcoming Events:</p>
+              <img src="https://www.w3schools.com/w3images/forest.jpg" alt="Forest" style="width:100%;">
+              <p><strong>Holiday</strong></p>
+              <p>Friday 15:00</p>
+              <p><button class="w3-button w3-block w3-theme-l4">Info</button></p>
+            </div>
+          </div>
+          <br>
+
+          <div class="w3-card w3-round w3-white w3-center">
+            <div class="w3-container">
+              <p>Friend Request</p>
+              <img src="https://www.w3schools.com/w3images/avatar6.png" alt="Avatar" style="width:50%"><br>
+              <span>Jane Doe</span>
+              <div class="w3-row w3-opacity">
+                <div class="w3-half">
+                  <button class="w3-button w3-block w3-green w3-section" title="Accept"><i
+                      class="fa fa-check"></i></button>
+                </div>
+                <div class="w3-half">
+                  <button class="w3-button w3-block w3-red w3-section" title="Decline"><i
+                      class="fa fa-remove"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+
+          <div class="w3-card w3-round w3-white w3-padding-16 w3-center">
+            <p>ADS</p>
+          </div>
+          <br>
+
+          <div class="w3-card w3-round w3-white w3-padding-32 w3-center">
+            <p><i class="fa fa-bug w3-xxlarge"></i></p>
+          </div>
+
+          <!-- End Right Column -->
+        </div>
+
+        <!-- End Grid -->
+      </div>
+      <br/><br/><br/>
+      <!-- End Page Container -->
     </div>
-    
-    <!-- Right Column -->
-    <div class="w3-col m2">
-      <div class="w3-card w3-round w3-white w3-center">
-        <div class="w3-container">
-          <p>Upcoming Events:</p>
-          <img src="https://www.w3schools.com/w3images/forest.jpg" alt="Forest" style="width:100%;">
-          <p><strong>Holiday</strong></p>
-          <p>Friday 15:00</p>
-          <p><button class="w3-button w3-block w3-theme-l4">Info</button></p>
-        </div>
-      </div>
-      <br>
-      
-      <div class="w3-card w3-round w3-white w3-center">
-        <div class="w3-container">
-          <p>Friend Request</p>
-          <img src="https://www.w3schools.com/w3images/avatar6.png" alt="Avatar" style="width:50%"><br>
-          <span>Jane Doe</span>
-          <div class="w3-row w3-opacity">
-            <div class="w3-half">
-              <button class="w3-button w3-block w3-green w3-section" title="Accept"><i class="fa fa-check"></i></button>
-            </div>
-            <div class="w3-half">
-              <button class="w3-button w3-block w3-red w3-section" title="Decline"><i class="fa fa-remove"></i></button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <br>
-      
-      <div class="w3-card w3-round w3-white w3-padding-16 w3-center">
-        <p>ADS</p>
-      </div>
-      <br>
-      
-      <div class="w3-card w3-round w3-white w3-padding-32 w3-center">
-        <p><i class="fa fa-bug w3-xxlarge"></i></p>
-      </div>
-      
-    <!-- End Right Column -->
-    </div>
-    
-  <!-- End Grid -->
-  </div>
-  
-<!-- End Page Container -->
-</div>
-<br>
+  <br>
 
-<!-- Footer -->
-<footer class="w3-container w3-theme-d3 w3-padding-16">
-  <h5>Footer</h5>
-</footer>
+  <!-- Footer -->
+  <footer class="w3-container w3-theme-d3 footer">
+    <h5 class="w3-padding-16">&copy; 2010-<span id="year"></span> by <a href="https://presspage.info" style="text-decoration: none;" target="_blank">PressPage Entertainment Inc.</a> DBA <a href="https://mykronee.cafe" style="text-decoration: none;" target="_blank">My Kronee Cafe</a>. All rights reserved.&nbsp;<span class="w3-tiny"><i>(Powered by w3.css)</i></span></h5>
+  </footer>
+  <!-- JAVASCRIPT -->
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+  <script type="text/javascript" src="./js/bignumber.min.js"></script>
+  <script type="text/javascript" src="./js/crypto-js.min.js"></script>
+  <script type="text/javascript" src="./js/utf8.min.js"></script>
+  <script type="text/javascript" src="./js/web3.min.js"></script>
+  <script type='text/javascript' src='./js/dict-readablepassphrase.js'></script>
+  <script type="text/javascript">
+// IP address and port number of the JSON-RPC server (virtual machine) to connect to
+    var url = "http://127.0.0.1:8545"
+    var user_name;
+    var web3 = new Web3();
+    var provider = new web3.providers.HttpProvider(url)
+    web3.setProvider(provider);
+    web3.eth.defaultAccount = web3.eth.accounts[0];    
+    var ABI = [{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":true,"internalType":"address","name":"spender","type":"address"},{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"_to","type":"address"},{"indexed":true,"internalType":"uint256","name":"_tokenId","type":"uint256"},{"indexed":false,"internalType":"bytes32","name":"_ipfsHash","type":"bytes32"}],"name":"Mint","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":true,"internalType":"address","name":"to","type":"address"},{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"Transfer","type":"event"},{"inputs":[],"name":"_owner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function","constant":true},{"inputs":[],"name":"_totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function","constant":true},{"inputs":[],"name":"name","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function","constant":true},{"inputs":[],"name":"symbol","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function","constant":true},{"inputs":[],"name":"getOwner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function","constant":true},{"inputs":[],"name":"getUserRole","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function","constant":true},{"inputs":[],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function","constant":true},{"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function","constant":true},{"inputs":[{"internalType":"address","name":"owner","type":"address"},{"internalType":"address","name":"spender","type":"address"}],"name":"allowance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function","constant":true},{"inputs":[{"internalType":"address","name":"recipient","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"transfer","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"approve","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"sender","type":"address"},{"internalType":"address","name":"recipient","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"transferFrom","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"addUser","outputs":[],"stateMutability":"payable","type":"function","payable":true},{"inputs":[{"internalType":"string","name":"message","type":"string"}],"name":"addPost","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"payable","type":"function","payable":true},{"inputs":[{"internalType":"address","name":"poster","type":"address"},{"internalType":"uint256","name":"index","type":"uint256"},{"internalType":"string","name":"message","type":"string"}],"name":"addComment","outputs":[],"stateMutability":"payable","type":"function","payable":true},{"inputs":[{"internalType":"string","name":"profession","type":"string"},{"internalType":"string","name":"location","type":"string"},{"internalType":"string","name":"dob","type":"string"},{"internalType":"string","name":"interests","type":"string"}],"name":"updateUserMeta","outputs":[],"stateMutability":"payable","type":"function","payable":true},{"inputs":[],"name":"addAdvertiser","outputs":[],"stateMutability":"payable","type":"function","payable":true},{"inputs":[{"internalType":"string","name":"message","type":"string"}],"name":"newAdvertisement","outputs":[],"stateMutability":"payable","type":"function","payable":true},{"inputs":[],"name":"getAdvertisers","outputs":[{"internalType":"address[]","name":"","type":"address[]"}],"stateMutability":"view","type":"function","constant":true},{"inputs":[],"name":"getUsers","outputs":[{"internalType":"address[]","name":"","type":"address[]"}],"stateMutability":"view","type":"function","constant":true},{"inputs":[{"internalType":"uint256","name":"post","type":"uint256"},{"internalType":"address","name":"poster","type":"address"},{"internalType":"address","name":"user","type":"address"}],"name":"setLike","outputs":[],"stateMutability":"payable","type":"function","payable":true},{"inputs":[{"internalType":"uint256","name":"post","type":"uint256"},{"internalType":"address","name":"poster","type":"address"},{"internalType":"address","name":"user","type":"address"}],"name":"setDislike","outputs":[],"stateMutability":"payable","type":"function","payable":true},{"inputs":[{"internalType":"address","name":"user","type":"address"}],"name":"getLikes","outputs":[{"components":[{"internalType":"uint256","name":"post","type":"uint256"},{"internalType":"address","name":"poster","type":"address"},{"internalType":"address","name":"user","type":"address"}],"internalType":"struct SocialNetworkToken.LikesDislikes[]","name":"","type":"tuple[]"}],"stateMutability":"view","type":"function","constant":true},{"inputs":[{"internalType":"address","name":"user","type":"address"}],"name":"getDislikes","outputs":[{"components":[{"internalType":"uint256","name":"post","type":"uint256"},{"internalType":"address","name":"poster","type":"address"},{"internalType":"address","name":"user","type":"address"}],"internalType":"struct SocialNetworkToken.LikesDislikes[]","name":"","type":"tuple[]"}],"stateMutability":"view","type":"function","constant":true}];
+    var abiAddress = "0x598f215bab728e0137057d3B5314b1abD6ae388E";  
+    var master = web3.eth.contract(ABI).at(abiAddress);
+    var owner = getOwner();
 
-<footer class="w3-container w3-theme-d5">
-  <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
-</footer>
- 
-<script>
-// Accordion
-function myFunction(id) {
-  var x = document.getElementById(id);
-  if (x.className.indexOf("w3-show") == -1) {
-    x.className += " w3-show";
-    x.previousElementSibling.className += " w3-theme-d1";
-  } else { 
-    x.className = x.className.replace("w3-show", "");
-    x.previousElementSibling.className = 
-    x.previousElementSibling.className.replace(" w3-theme-d1", "");
-  }
-}
 
-// Used to toggle the menu on smaller screens when clicking on the menu button
-function openNav() {
-  var x = document.getElementById("navDemo");
-  if (x.className.indexOf("w3-show") == -1) {
-    x.className += " w3-show";
-  } else { 
-    x.className = x.className.replace(" w3-show", "");
-  }
-}
-</script>
+    window.onload = async function() {
+      var year = new Date().toISOString().split('T')[0].split('-')[0];
+      document.getElementById('year').innerHTML = year;
+
+      init();
+    }
+
+    // initialization
+    function init() {
+      web3.eth.defaultAccount = user_name;
+      master
+      console.log(getUsers());
+    }
+
+    async function getOwner() {
+      owner = await master.getOwner();
+    }
+
+    // login
+    document.getElementById("login").addEventListener("click", function(){
+      user_name = $("#userName").val(); //User address to be entered
+      var password = $("#password").val(); //address's password
+      var JSONdata = createJSONdata("personal_unlockAccount", [user_name, password, 3600]);
+      //Run json-rpc (initial) Connect to geth and run init
+      executeJsonRpc(url, JSONdata, function success(data) {
+          // log-in succeed
+          if (data.error == null) {
+            console.log("login success!");
+            init();
+            //var x = "Login & Reset is successful!"
+            //alert(x);
+            role();
+          } else {
+              // Login failed
+              console.log("login error1");
+              console.log(data.error.message);
+          }
+      }, function error(data) {
+          // Login failed
+          console.log("login error2");
+      });
+    });
+    // Generate JSON message
+    function createJSONdata(method, params) {
+      var JSONdata = {
+          "jsonrpc": "2.0",
+          "method": method,
+          "params": params
+      };
+      return JSONdata;
+    }
+    // JSON-RPC execution: I don't know, I don't know what purpose the function (data) part is for and what role it plays.
+    function executeJsonRpc(url_exec, JSONdata, success, error) {
+      $.ajax({
+          type: 'post',
+          url: url_exec,
+          data: JSON.stringify(JSONdata),
+          contentType: 'application/JSON',
+          dataType: 'JSON',
+          scriptCharset: 'utf-8',
+          success: function (data) {
+              success(data);
+          },
+          error: function (data) {
+              error(data);
+          }
+      });
+    }
+
+    function showRegisterDialog() {
+      document.getElementById('register-passphrase').value = new ReadablePassphrase( 'random' );
+      document.getElementById('register-dialog').style.display='block';
+    }
+
+    function registerChoice(obj) {
+      if (obj.value == "import") {
+        document.getElementById("register-create").style.display = "none";
+        document.getElementById("register-import").style.display = "block";
+      } else {
+        document.getElementById("register-import").style.display = "none";
+        document.getElementById("register-create").style.display = "block";
+      }
+    }
+
+    document.getElementById("register-now").addEventListener("click", function(e){
+      //this.addAttribute('disabled','disabled');
+      var choice = document.getElementById("register-choice").value;
+      if (choice == "import") {
+        try {
+          var privateKey = document.getElementById("register-privatekey").value;
+          var result = importAccount(privateKey);
+          console.log(result);
+        } catch(error) {
+          console.log(error);
+        }
+      } else {
+        try {
+          var passphrase = document.getElementById('register-passphrase').value;
+          var promise = newAccount(passphrase);
+          promise.then(function(account){
+            console.log(account);
+            document.getElementById("register-account").value = account;
+            var result = addUser(account);
+            console.log(result);
+          });
+        } catch(error) {
+          console.log(error);
+        }
+      }
+    });
+
+    async function newAccount(passphrase) {
+      try {
+        return await web3.personal.newAccount(passphrase);
+      } catch(error) {
+        console.log(error);
+      }
+    }
+
+    async function importAccount(privateKey) {
+      try {
+        return await web3.eth.accounts.privateKeyToAccount('0x'+privateKey);
+      } catch(error) {
+        console.log(error);
+      }
+    }
+
+    async function addUser(address) {
+      try {
+        return await master.addUser({from: address});
+      } catch(error) {
+        console.log(error);
+      }
+    }
+
+    async function getUsers() {
+      return await master.getUsers({from: owner});
+    }
+
+    // Accordion
+    function myFunction(id) {
+      var x = document.getElementById(id);
+      if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+        x.previousElementSibling.className += " w3-theme-d1";
+      } else {
+        x.className = x.className.replace("w3-show", "");
+        x.previousElementSibling.className =
+          x.previousElementSibling.className.replace(" w3-theme-d1", "");
+      }
+    }
+
+    // get user role
+    async function role() {
+      var role = await master.getUserRole({from: user_name});
+      console.log(role);
+      if (role != "unknown") {
+          document.getElementById("login-page").style.display = "none";
+          //getBalance(role);
+          switch(role) {
+              case 'owner':
+                  {
+                    //document.getElementById('owner-address').value = user_name;
+                    //getSubscribers();
+                    //getConsumers();
+                    //getBlocktime();                    
+                    document.getElementById("owner-page").style.display = "block";
+                  }
+                  break;
+              case 'advertiser':
+                  {                    
+                    //document.getElementById('subscriber-address').value = user_name;
+                    //document.addEventListener(master.SubscriberNotified, function(addr, message){
+                    //    console.log(addr, message);
+                    //});
+                    //document.addEventListener(master.ConsumerNotified, function(addr, message){
+                    //    console.log(addr, message);
+                    //});
+                    document.getElementById("advertiser-page").style.display = "block";
+                  }
+                  break;
+              case 'usser':
+                  {
+                    document.getElementById("login-page").style.display = "none";
+                    document.getElementById("nav-globe").style.display = "block";
+                    document.getElementById("nav-user").style.display = "block";
+                    document.getElementById("nav-mail").style.display = "block";
+                    document.getElementById("nav-notify").style.display = "block";
+                    document.getElementById("nav-account").style.display = "block";
+                    document.getElementById("navDemo").style.display = "block";
+                    document.getElementById("main-page").style.display = "block";
+                  }
+                  break;
+          }
+      }
+    }
+
+    // Used to toggle the menu on smaller screens when clicking on the menu button
+    function openNav() {
+      var x = document.getElementById("navDemo");
+      if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+      } else {
+        x.className = x.className.replace(" w3-show", "");
+      }
+    }
+  </script>
 
 </body>
-</html> 
+
+</html>
